@@ -60,8 +60,8 @@
 ;; ========== Priority =========
 
 (: check-pos : Integer Integer -> Boolean)
-;; compare two passengers, determine whether the first passenger will board
-;;  before the second by the criteria's other than upgraded? and group
+;; comparing two passengers to determine whether the first passenger will board
+;; before the second by criterias other than upgraded and group
 (define (check-pos p1 p2)
   (cond
     [(< p1 p2) #t]
@@ -70,8 +70,8 @@
 
 
 (: check-group : Passenger Passenger -> Boolean)
-;; compare two passengers, determine whether the first passenger will
-;; board before the second by the criteria's other than upgraded?
+;; comparing two passengers to determine whether the first passenger will
+;; board before the second by criterias other than upgraded
 (define (check-group pa1 pa2)
   (match* (pa1 pa2)
     [((Passenger n1 g1 p1 f1 u1) (Passenger n2 g2 p2 f2 u2))
@@ -87,8 +87,8 @@
 
 
 (: passenger<? : Passenger Passenger -> Boolean)
-;; compare two passengers, determine whether the first 
-;; passenger will board before the second
+;; comparing two passengers to determine whether the first 
+;; passenger will board before the second or not
 (define (passenger<? pa1 pa2)
   (match* (pa1 pa2)
     [((Passenger n1 g1 p1 f1 u1) (Passenger n2 g2 p2 f2 u2))
@@ -118,8 +118,9 @@
 ;; ========== Sorting =========
 
 (: insert : Passenger (Listof Passenger) -> (Listof Passenger))
-; Insert an integer in a SORTED LIST of integers so that the list remains sorted
-; IMPORTANT - The list must be SORTED
+; Inserting an integer in a sorted list of integers 
+; in such a way that the list remains sorted
+; Precondition - The list must be SORTED
 (define (insert p l)
   (match l
     ['() (list p)]
@@ -135,7 +136,7 @@
 
 
 (: insertion-sort-passengers : (Listof Passenger) -> (Listof Passenger))
-;; Sorts a list of passengers using insertion sort
+;; Sorting a list of passengers using insertion sort
 (define (insertion-sort-passengers l)
   (foldr insert '() l))
 
@@ -166,7 +167,7 @@
 
 
 (: quicksort-passengers : (Listof Passenger) -> (Listof Passenger))
-;; Sorts a list of passengers using quicksort
+;; Sorting a list of passengers using quicksort
 (define (quicksort-passengers l)
   (match l
     ['() '()]
@@ -198,7 +199,7 @@
 
 
 (: take : All (A) Integer (Listof A) -> (Listof A))
-; returns a list of the first half elements of the given list
+; returning a list of the first half elements of the given list
 (define (take half l)
   (if (= 0 half) '() (match l
                        ['() '()]
@@ -206,7 +207,8 @@
 
 
 (: drop : All (A) Integer (Listof A) -> (Listof A))
-; drop the first half elements of the given list, returning the remaining list
+; dropping the first half elements of the given list
+; returning the processed list
 (define (drop half l)
   (if (= 0 half) l (match l
                      [(cons head tail) (drop (- half 1) tail)])))
@@ -220,8 +222,8 @@
 
 
 (: merge : (Listof Passenger) (Listof Passenger) -> (Listof Passenger))
-; merges two sorted lists of integers
-; the input lists must already be sorted
+; merging the two sorted lists of integers
+; Precondition – the input lists must already be sorted
 (define (merge l1 l2)
   (match* (l1 l2)
     [('() '()) '()]
@@ -242,7 +244,7 @@
 
 
 (: merge-sort-passengers : (Listof Passenger) -> (Listof Passenger))
-;; Sorts a list of passengers using merge sort
+;; Sorting the list of passengers using merge sort
 (define (merge-sort-passengers l)
   (match l
     ['() '()] 
@@ -266,7 +268,7 @@
 ;; ========== Analyze (Optional) =========
 
 (: random-passenger : -> Passenger)
-;; Generates a random passenger
+;; Generating a random passenger
 (define (random-passenger)
   (Passenger (number->string (random 0 2000000000))
              (match (random 0 3) [0 'A] [1 'B] [2 'C])
@@ -275,12 +277,12 @@
              (= (random 0 4) 0)))
 
 (: random-passenger-list : Integer -> (Listof Passenger))
-;; Generates a list of n random passengers
+;; Generating a list of n random passengers
 (define (random-passenger-list n)
   (build-list n (lambda ([k : Integer]) (random-passenger))))
 
 (: eat : All (A) A -> 'yum)
-;; Takes in any value and returns 'yum.
+;; Taking any value and returns 'yum.
 (define (eat a) 'yum)
 
 (: my-passenger-list : (Listof Passenger))
